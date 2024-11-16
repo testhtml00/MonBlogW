@@ -1,85 +1,70 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Fonction d'accordéon
-    const accordionTitles = document.querySelectorAll('.accordion-title');
-    accordionTitles.forEach(title => {
-        title.addEventListener('click', () => {
-            title.classList.toggle('active');
-            const content = title.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
+// Mode sombre
+document.getElementById('toggle-theme').addEventListener('click', function () {
+    document.body.classList.toggle('dark-mode');
+    this.textContent = document.body.classList.contains('dark-mode') ? '☀️ Mode clair' : '🌙 Mode sombre';
+});
+
+// Recherche
+document.getElementById('search-bar').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    document.querySelectorAll('.accordion-title').forEach((title) => {
+        const article = title.closest('article');
+        if (title.textContent.toLowerCase().includes(query)) {
+            article.style.display = 'block';
+        } else {
+            article.style.display = 'none';
+        }
     });
+});
 
-    // Barre de progression de lecture
-    const progressBar = document.querySelector('.progress-bar');
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        progressBar.style.width = scrollPercent + '%';
+// Likes
+document.querySelectorAll('.like-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+        const postId = this.dataset.id;
+        const likeCount = document.getElementById('like-count-' + postId);
+        likeCount.textContent = parseInt(likeCount.textContent) + 1;
     });
+});
 
-    // Fonction de like et dislike avec stockage local
-    const likeButtons = document.querySelectorAll('.like-btn');
-    const dislikeButtons = document.querySelectorAll('.dislike-btn');
-
-    likeButtons.forEach(button => {
-        const articleId = button.getAttribute('data-id');
-        const dislikeButton = document.querySelector(`.dislike-btn[data-id="${articleId}"]`);
-        const likeCount = button.querySelector('.like-count');
-        const dislikeCount = dislikeButton.querySelector('.dislike-count');
-        
-        let storedLike = localStorage.getItem(`like-count-${articleId}`);
-        let storedDislike = localStorage.getItem(`dislike-count-${articleId}`);
-        
-        if (storedLike) likeCount.textContent = storedLike;
-        if (storedDislike) dislikeCount.textContent = storedDislike;
-
-        button.addEventListener('click', () => {
-            let count = parseInt(likeCount.textContent);
-            let dislikeCountValue = parseInt(dislikeCount.textContent);
-
-            if (button.classList.contains('active')) {
-                count--;
-                button.classList.remove('active');
-            } else {
-                count++;
-                button.classList.add('active');
-                if (dislikeButton.classList.contains('active')) {
-                    dislikeCountValue--;
-                    dislikeButton.classList.remove('active');
-                }
-            }
-
-            likeCount.textContent = count;
-            localStorage.setItem(`like-count-${articleId}`, count);
-            dislikeCount.textContent = dislikeCountValue;
-            localStorage.setItem(`dislike-count-${articleId}`, dislikeCountValue);
-        });
-
-        dislikeButton.addEventListener('click', () => {
-            let count = parseInt(dislikeCount.textContent);
-            let likeCountValue = parseInt(likeCount.textContent);
-
-            if (dislikeButton.classList.contains('active')) {
-                count--;
-                dislikeButton.classList.remove('active');
-            } else {
-                count++;
-                dislikeButton.classList.add('active');
-                if (button.classList.contains('active')) {
-                    likeCountValue--;
-                    button.classList.remove('active');
-                }
-            }
-
-            dislikeCount.textContent = count;
-            localStorage.setItem(`dislike-count-${articleId}`, count);
-            likeCount.textContent = likeCountValue;
-            localStorage.setItem(`like-count-${articleId}`, likeCountValue);
-        });
+// Dislikes
+document.querySelectorAll('.dislike-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+        const postId = this.dataset.id;
+        const dislikeCount = document.getElementById('dislike-count-' + postId);
+        dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
     });
+});
+
+// Commentaires
+document.querySelectorAll('.comment-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+        const postId = this.dataset.id;
+        const nameInput = document.getElementById('name-input-' + postId);
+        const commentInput = document.getElementById('comment-input-' + postId);
+        const commentsList = document.getElementById('comments-list-' + postId);
+
+        const name = nameInput.value;
+        const comment = commentInput.value;
+
+        if (name && comment) {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${name}</strong>: ${comment}`;
+            commentsList.appendChild(li);
+            nameInput.value = '';
+            commentInput.value = '';
+        }
+    });
+});
+
+// Partage générique du blog
+document.getElementById('share-btn').addEventListener('click', function () {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Mon Blog',
+            text: 'Découvrez mon blog avec des articles intéressants.',
+            url: window.location.href,
+        }).catch(console.error);
+    } else {
+        alert('Le partage n\'est pas supporté sur ce navigateur.');
+    }
 });

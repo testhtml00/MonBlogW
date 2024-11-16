@@ -5,174 +5,179 @@
     box-sizing: border-box;
 }
 
-/* Barre de progression */
-.progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 5px;
-    background-color: #007BFF;
-    z-index: 1000;
-    transition: width 0.25s ease;
-}
-
-/* Effets d'accordéon */
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out, padding 0.3s ease;
-}
-
-.accordion-title.active + .accordion-content {
-    max-height: 200px;
-    padding: 15px;
-}
-
-/* Autres styles */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
     background-color: #333;
     color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    width: 90px;  /* Réduire la taille du logo */
-    height: 90px;
-    position: absolute;
-    top: 10px;  /* Placer le logo en haut */
-    right: 10px;  /* Placer le logo à droite */
-    cursor: pointer; /* Ajouter un curseur en forme de main */
-}
-
-.header-text h1 {
-    margin: 0;
-    font-size: 1.8em;
-}
-
-.header-text p {
-    font-size: 1em;
-    color: #ccc;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 20px;
-}
-
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-
-.content {
-    width: 100%;
-    max-width: 700px;
-}
-
-article {
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    transition: transform 0.3s;
-}
-
-article:hover {
-    transform: scale(1.02);
-}
-
-.date {
-    font-size: 0.9em;
-    color: #888;
-}
-
-/* Boutons de like et dislike */
-.like-container {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.like-btn, .dislike-btn {
+header .theme-btn {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+header .theme-btn:hover {
+    background-color: #777;
+}
+
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+#search-bar {
+    padding: 10px;
+    width: 80%;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.filter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.filter-btn {
+    padding: 10px;
+    margin: 0 10px;
     background-color: #007BFF;
     color: #fff;
     border: none;
-    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.1s, background-color 0.3s;
-    font-size: 14px;
 }
 
-.like-btn:active, .dislike-btn:active {
-    transform: scale(1.1);
+.filter-btn:hover {
+    background-color: #0056b3;
 }
 
-.like-btn.active {
-    background-color: #28a745;
-}
-
-.dislike-btn.active {
-    background-color: #dc3545;
-}
-
-.sidebar {
-    width: 100%;
-    max-width: 300px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border: 1px solid #ddd;
+/* Articles */
+article {
+    background-color: #fff;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+.accordion-title {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.accordion-content {
+    margin-top: 10px;
+}
+
+/* Boutons J'aime et Je n'aime pas */
+.like-btn, .dislike-btn {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.like-btn:hover, .dislike-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Commentaires */
+.comment-section textarea, .comment-section input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.comment-section .comment-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-section .comment-btn:hover {
+    background-color: #0056b3;
+}
+
+.comment-section .comments-list {
+    list-style-type: none;
     margin-top: 20px;
+}
+
+.comment-section .comments-list li {
+    margin-bottom: 10px;
+}
+
+/* Mode sombre */
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode header {
+    background-color: #222;
+}
+
+body.dark-mode .theme-btn {
+    background-color: #777;
+}
+
+body.dark-mode article {
+    background-color: #444;
+}
+
+body.dark-mode .like-btn, body.dark-mode .dislike-btn {
+    background-color: #444;
+}
+
+body.dark-mode .comment-btn {
+    background-color: #333;
+}
+
+body.dark-mode .notification {
+    background-color: #333;
+}
+
+body.dark-mode .comment-section textarea, 
+body.dark-mode .comment-section input {
+    background-color: #555;
+    color: white;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
     text-align: center;
     padding: 10px 0;
-    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .logo {
-        width: 40px;
-        height: 40px;
-    }
-    .like-btn, .dislike-btn {
-        padding: 8px 10px;
-        font-size: 13px;
-    }
-    header h1 {
-        font-size: 1.5em;
-    }
-    .sidebar, .content {
+/* Réponsive */
+@media (max-width: 768px) {
+    #search-bar {
         width: 100%;
-        margin-top: 20px;
+    }
+    .filter-container {
+        flex-direction: column;
+        gap: 10px;
     }
 }

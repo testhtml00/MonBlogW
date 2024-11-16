@@ -1,74 +1,145 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Blog</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Barre de progression de lecture -->
     <div class="progress-bar"></div>
 
-    <!-- En-tête avec logo -->
+    <!-- En-tête avec mode clair/sombre -->
     <header>
         <div class="header-container">
-            <!-- Lien cliquable vers l'adresse email -->
-            <a href="mailto:testhtml37@gmail.com" class="logolink">
-                <img src="W.jpg" alt="W" class="logo">
-            </a>
             <div class="header-text">
                 <h1>Mon Blog</h1>
                 <p>Partage d'articles sur divers sujets intéressants</p>
             </div>
+            <button id="toggle-theme" class="theme-btn">🌙 Mode sombre</button>
         </div>
     </header>
+
+    <!-- Barre de recherche -->
+    <div class="search-container">
+        <input type="text" id="search-bar" placeholder="Rechercher un article...">
+    </div>
+
+    <!-- Filtre par catégorie -->
+    <div class="filter-container">
+        <button class="filter-btn" data-category="all">Tous</button>
+        <button class="filter-btn" data-category="HTML & CSS">HTML & CSS</button>
+        <button class="filter-btn" data-category="JavaScript">JavaScript</button>
+        <button class="filter-btn" data-category="Web Design">Web Design</button>
+    </div>
+
+    <!-- Bouton de partage -->
+    <div class="share-container">
+        <button id="share-btn" class="share-btn">Partager</button>
+    </div>
 
     <!-- Contenu principal -->
     <main>
         <div class="container">
             <!-- Section de l'article -->
-            <section class="content">
-                <article>
+            <section id="articles" class="content">
+                <!-- Article 1 -->
+                <article data-category="HTML & CSS">
                     <h2 class="accordion-title">Comment apprendre le HTML et CSS</h2>
                     <div class="accordion-content">
                         <p class="date">Publié le 10 novembre 2024</p>
-                        <p>Le HTML et le CSS sont les bases du développement web...</p>
+                        <p>Le HTML et le CSS sont les bases du développement web, et apprendre ces technologies est essentiel pour commencer à créer des sites web. Voici quelques conseils pour bien débuter avec HTML et CSS...</p>
+
+                        <!-- Like/Dislike -->
                         <div class="like-container">
-                            <button class="like-btn" data-id="1">👍 J'aime <span class="like-count">0</span></button>
-                            <button class="dislike-btn" data-id="1">👎 Je n'aime pas <span class="dislike-count">0</span></button>
+                            <button class="like-btn" data-id="1">👍 J'aime</button>
+                            <button class="dislike-btn" data-id="1">👎 Je n'aime pas</button>
+                            <p>J'aime: <span class="like-count" id="like-count-1">0</span> | Je n'aime pas: <span class="dislike-count" id="dislike-count-1">0</span></p>
+                        </div>
+
+                        <!-- Commentaire -->
+                        <div class="comment-section">
+                            <h3>Commentaires</h3>
+                            <input type="text" id="name-input-1" placeholder="Votre prénom" required>
+                            <textarea id="comment-input-1" class="comment-input" placeholder="Ajoutez un commentaire..." required></textarea>
+                            <button id="comment-btn-1" class="comment-btn" data-id="1">Envoyer</button>
+                            <ul id="comments-list-1" class="comments-list"></ul>
                         </div>
                     </div>
                 </article>
 
-                <article>
-                    <h2 class="accordion-title">Les meilleures ressources pour apprendre le JavaScript</h2>
+                <!-- Article 2 -->
+                <article data-category="JavaScript">
+                    <h2 class="accordion-title">Introduction à JavaScript pour les débutants</h2>
                     <div class="accordion-content">
-                        <p class="date">Publié le 8 novembre 2024</p>
-                        <p>Découvrez les sites et les plateformes où vous pouvez apprendre JavaScript...</p>
+                        <p class="date">Publié le 12 novembre 2024</p>
+                        <p>JavaScript est l'un des langages de programmation les plus populaires aujourd'hui. Il est principalement utilisé pour rendre les pages web interactives. Dans cet article, nous explorerons les bases de JavaScript...</p>
+
+                        <!-- Like/Dislike -->
                         <div class="like-container">
-                            <button class="like-btn" data-id="2">👍 J'aime <span class="like-count">0</span></button>
-                            <button class="dislike-btn" data-id="2">👎 Je n'aime pas <span class="dislike-count">0</span></button>
+                            <button class="like-btn" data-id="2">👍 J'aime</button>
+                            <button class="dislike-btn" data-id="2">👎 Je n'aime pas</button>
+                            <p>J'aime: <span class="like-count" id="like-count-2">0</span> | Je n'aime pas: <span class="dislike-count" id="dislike-count-2">0</span></p>
+                        </div>
+
+                        <!-- Commentaire -->
+                        <div class="comment-section">
+                            <h3>Commentaires</h3>
+                            <input type="text" id="name-input-2" placeholder="Votre prénom" required>
+                            <textarea id="comment-input-2" class="comment-input" placeholder="Ajoutez un commentaire..." required></textarea>
+                            <button id="comment-btn-2" class="comment-btn" data-id="2">Envoyer</button>
+                            <ul id="comments-list-2" class="comments-list"></ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article data-category="Web Design">
+                    <h2 class="accordion-title">Les bases du Web Design</h2>
+                    <div class="accordion-content">
+                        <p class="date">Publié le 15 novembre 2024</p>
+                        <p>Le design d'un site web joue un rôle essentiel dans l'expérience utilisateur. Il est important de comprendre les principes du design pour créer des sites agréables et fonctionnels...</p>
+
+                        <!-- Like/Dislike -->
+                        <div class="like-container">
+                            <button class="like-btn" data-id="3">👍 J'aime</button>
+                            <button class="dislike-btn" data-id="3">👎 Je n'aime pas</button>
+                            <p>J'aime: <span class="like-count" id="like-count-3">0</span> | Je n'aime pas: <span class="dislike-count" id="dislike-count-3">0</span></p>
+                        </div>
+
+                        <!-- Commentaire -->
+                        <div class="comment-section">
+                            <h3>Commentaires</h3>
+                            <input type="text" id="name-input-3" placeholder="Votre prénom" required>
+                            <textarea id="comment-input-3" class="comment-input" placeholder="Ajoutez un commentaire..." required></textarea>
+                            <button id="comment-btn-3" class="comment-btn" data-id="3">Envoyer</button>
+                            <ul id="comments-list-3" class="comments-list"></ul>
                         </div>
                     </div>
                 </article>
             </section>
-
-            <!-- Barre latérale -->
-            <aside class="sidebar">
-                <h3>À propos de moi</h3>
-                <p>Je suis un passionné de développement web qui aime partager mes connaissances...</p>
-                <h3>Catégories</h3>
-                <ul>
-                    <li><a href="#">HTML & CSS</a></li>
-                    <li><a href="#">JavaScript</a></li>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">SEO</a></li>
-                    <li><a href="#">POUR ME CONTACTER APPUYER SUR MON LOGO EN HAUT A DROITE DE LA PAGE</a></li>
-                </ul>
-            </aside>
         </div>
     </main>
+
+    <!-- Section Nous Contacter -->
+    <section id="contact" class="content">
+        <h2>Nous Contacter</h2>
+        <form action="." method="POST" id="contact-form">
+            <label for="name">Votre Nom:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Votre Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Votre Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit" id="submit-contact" class="comment-btn">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- Notifications -->
+    <div id="notification" class="notification hidden"></div>
 
     <!-- Pied de page -->
     <footer>
@@ -77,4 +148,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
